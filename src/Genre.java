@@ -1,2 +1,12 @@
-package PACKAGE_NAME;public enum Genre {
+public enum Genre {
+    ACADEMIC,
+    ACTION,
+    DRAMA,
+    SCIFI,
+    ROMANTIC,
+    HUMOR,
+    DARK,
+    TEENAGER,
+    CHILDREN,
+    LIFES_WORK;
 }
