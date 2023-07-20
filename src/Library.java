@@ -3,11 +3,14 @@ import java.util.*;
 public class Library {
     private static Map<Book, Integer> bookListWithQuantity = new HashMap<>();
     private static Set<Reader> readersList = new HashSet<>();
-
-
+    protected static Map<Book, Integer> howManyTimesBooksBorrowedCounter = new HashMap<>();
     public void addBookToLibrary(Book book) {
         int currentQuantity = bookListWithQuantity.getOrDefault(book, 0);
         bookListWithQuantity.put(book, currentQuantity + 1);
+    }
+    public void addBookWithQuantity(Book book, int quantity) {
+        int currentQuantity = bookListWithQuantity.getOrDefault(book, 0);
+        bookListWithQuantity.put(book, currentQuantity + quantity);
     }
 
     public void listAllLibrary() {
@@ -65,6 +68,18 @@ public class Library {
             }
         }
         System.out.println("The reader who borrowed the most books: " + whoHasTheMostBooks.getName() + " with " + maximum + " books");
+    }
+    
+    public void mostBorrowedBook() {
+        int maximum = 0;
+        Book mostBorrowed = null;
+        for (Map.Entry<Book, Integer> actualEntry : howManyTimesBooksBorrowedCounter.entrySet()) {
+            if(actualEntry.getValue() > maximum) {
+                maximum = actualEntry.getValue();
+                mostBorrowed = actualEntry.getKey();
+            }
+        }
+        System.out.println("The most borrowed book is: " + mostBorrowed.getTitle() + " with " + maximum + " times");
     }
 }
 

@@ -3,10 +3,11 @@ import java.util.List;
 import java.util.PropertyResourceBundle;
 
 public class Book extends Library{
-    private String title;
-    private List<String> writers = new ArrayList<>();
-    private String publishingYear;
-    private Genre genre;
+    private final String title;
+    private final List<String> writers;
+    private final String publishingYear;
+    private final Genre genre;
+    private int howManyTimesABookHasBeenBorrowedCounter;
 
     public Book(String title, List<String> writers, String publishingYear, Genre genre) {
         this.title = title;

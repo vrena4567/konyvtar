@@ -25,5 +25,10 @@ public class Main {
         konyvtar.findBookByWriter("J.K.Rowling");
         konyvtar.findBookByGenre(Genre.LIFES_WORK);
         konyvtar.whoBorrowedTheMostBooks();
+        konyvtar.addBookWithQuantity(harryPotter2, 20);
+        gina.borrowBook(harryPotter2.getTitle());
+        renata.borrowBook(harryPotter2.getTitle());
+        konyvtar.listAllLibrary();
+        konyvtar.mostBorrowedBook();
     }
 }

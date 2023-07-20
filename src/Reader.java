@@ -1,12 +1,11 @@
 import java.util.*;
 
 public class Reader extends Library {
-    private String name;
+    private final String name;
     private final String readerIdentityNumber;
-    private Set<Genre> preferedGenre = new HashSet<>();
+    private Set<Genre> preferredGenre = new HashSet<>();
     private Set<Book> booksBorrowed = new HashSet<>();
     protected int booksBorrowedCounter;
-    protected int howManyTimesABookHasBeenBorrowedCounter;
 
 
     public Reader(String name, String readerIdentityNumber) {
@@ -20,6 +19,8 @@ public class Reader extends Library {
             if (actualEntry.getKey().getTitle().equals(title) && actualEntry.getValue() > 0) {
                 System.out.println("The book " + actualEntry.getKey().getTitle() + " is available: " + actualEntry.getValue() + " piece");
                 booksBorrowed.add(actualEntry.getKey());
+                int actualBorrowCounter = howManyTimesBooksBorrowedCounter.getOrDefault(actualEntry.getKey(), 0);
+                howManyTimesBooksBorrowedCounter.put(actualEntry.getKey(), actualBorrowCounter + 1);
                 int actualNumber = getBookListWithQuantity().getOrDefault(actualEntry.getKey(), 0);
                 getBookListWithQuantity().put(actualEntry.getKey(), actualNumber - 1);
                 System.out.println("Remaining quantity after your are borrowing this book: " + actualEntry.getValue());
@@ -39,7 +40,6 @@ public class Reader extends Library {
         System.out.println(book.getTitle() + "is returned");
         System.out.print("Rest of ");
         getListOfBooksBorrowed();
-
     }
 
     public void getListOfBooksBorrowed() {
@@ -51,18 +51,18 @@ public class Reader extends Library {
     }
 
     public void addPreferedGenre(Genre genre) {
-        this.preferedGenre.add(genre);
+        this.preferredGenre.add(genre);
     }
 
     public void addPreferedGenre(Genre genre, Genre genre1, Genre genre2) {
-        this.preferedGenre.add(genre);
-        this.preferedGenre.add(genre1);
-        this.preferedGenre.add(genre2);
+        this.preferredGenre.add(genre);
+        this.preferredGenre.add(genre1);
+        this.preferredGenre.add(genre2);
     }
 
     public String getPreferedGenres() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Genre actual : preferedGenre) {
+        for (Genre actual : preferredGenre) {
             stringBuilder.append(actual).append(", ");
         }
         stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.length());
@@ -78,7 +78,7 @@ public class Reader extends Library {
         return "Reader{" +
                 "name='" + name + '\'' +
                 ", readerIdentityNumber='" + readerIdentityNumber + '\'' +
-                ", prefferedGenre=" + preferedGenre +
+                ", prefferedGenre=" + preferredGenre +
                 ", booksBorrowed=" + booksBorrowed +
                 '}';
     }
